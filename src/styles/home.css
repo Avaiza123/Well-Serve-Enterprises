@@ -1,0 +1,116 @@
+.home-container {
+  background-color: white;
+  color: #0f172a; /* dark blue text */
+  font-family: "Poppins", sans-serif;
+}
+
+/* ---------- Hero Banner ---------- */
+.hero-banner {
+  background-size: cover;
+  background-position: center right;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 5%;
+  color: #0f172a;
+  position: relative;
+}
+
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(154, 149, 149, 0.85);
+}
+
+.hero-content {
+  position: relative;
+  max-width: 600px;
+  z-index: 1;
+}
+
+.hero-subtitle {
+  font-weight: 700;
+  color: #075c55; /* teal */
+  margin-bottom: 10px;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.hero-title span {
+  color: #0d5650;
+}
+
+.hero-description {
+  color: #334155;
+  font-size: 1.1rem;
+  margin-bottom: 24px;
+}
+
+.hero-button {
+  display: inline-block;
+  background-color: #0d5650; /* teal */
+  color: white;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.hero-button:hover {
+  background-color: #115e59; /* darker teal */
+  transform: translateY(-2px);
+}
+
+/* ---------- Features Section ---------- */
+.features-section {
+  padding: 60px 5%;
+  text-align: center;
+  background-color: #f8fafc;
+}
+
+.features-section h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  color: #0f172a;
+}
+
+.features-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.feature-item {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+}
+
+.feature-item h4 {
+  color: #0d9488;
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.feature-item p {
+  color: #475569;
+}
+ 

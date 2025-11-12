@@ -1,0 +1,145 @@
+/* Footer.css */
+.footer {
+  background-color: #484e4c; /* Darkest blue */
+  color: #ffffff; /* White text */
+  padding: 50px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.footer-stats div {
+  text-align: center;
+}
+
+.footer-stats h3 {
+  font-size: 28px;
+  margin: 0;
+  color: #e8e8e8; /* Highlight color for numbers */
+}
+
+.footer-stats p {
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+.footer-features {
+  flex: 1;
+  min-width: 250px;
+}
+
+.footer-features div {
+  margin-bottom: 20px;
+}
+
+.footer-features h4 {
+  font-size: 16px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #18866c; /* Highlight headings */
+}
+
+.footer-features p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-delivery {
+  flex-basis: 100%;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-delivery h4 {
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: #18866c;;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 30px;
+}
+
+.company-info h4,
+.social-media h4 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #18866c;;
+}
+
+.company-info ul {
+  list-style: none;
+  padding: 0;
+}
+
+.company-info ul li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.company-info ul li:hover {
+  color: #57a0ff;
+}
+
+.social-icons span {
+  margin-right: 15px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.social-icons span:hover {
+  color: #57a0ff;
+}
+
+.footer-copy {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.footer-policies {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.footer-policies span {
+  margin: 0 10px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.footer-policies span:hover {
+  color: #57a0ff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-top,
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-stats div {
+    margin-bottom: 20px;
+  }
+}
