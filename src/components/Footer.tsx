@@ -46,9 +46,11 @@ const Footer: React.FC = () => {
             >
               <FaFacebookF />
             </a>
-            <>                                       </>
+            <>  </>
+            <> </>
+            <> </>
             <a
-              href="https://www.instagram.com/yourpage"
+              href="https://www.instagram.com/wellserveenterprises?igsh=dDkxZGlnbGp3aWll"
               target="_blank"
               rel="noopener noreferrer"
               className="social-icon"

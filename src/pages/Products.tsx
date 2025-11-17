@@ -1,86 +1,116 @@
-// src/components/Products.tsx
-import React, { useState } from 'react'
-import { useQuery } from 'react-query'
-import { fetchProducts } from '@/api/productsService'
-// import ProductCard from '@/pages/ProductCard'
-import ProductCard from './ProductCard'
-// Define Product type
-export interface Product {
-  id: string
-  name: string
-  price: number
-  image?: string
-  // Add other fields from your API if needed
-}
+import React, { useEffect, useState } from "react";
+import { Product, ProductService } from "../api/productsService";
+import ProductCard from "./ProductCard";
+import "../styles/Product.css";
+import { FaFilter } from "react-icons/fa";
 
-export default function Products() {
-  const { data = [], isLoading } = useQuery<Product[]>('products', fetchProducts)
-  const [query, setQuery] = useState('')
-  const [minPrice, setMinPrice] = useState<number | ''>('')
-  const [maxPrice, setMaxPrice] = useState<number | ''>('')
+const Products: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [tempSelectedCategories, setTempSelectedCategories] = useState<string[]>([]);
+  const [showFilter, setShowFilter] = useState(false);
 
-  // Filter products based on search and price
-  const filtered = data.filter(p => {
-    if (query && !p.name.toLowerCase().includes(query.toLowerCase())) return false
-    if (minPrice !== '' && p.price < minPrice) return false
-    if (maxPrice !== '' && p.price > maxPrice) return false
-    return true
-  })
+  useEffect(() => {
+    ProductService.getProducts()
+      .then((data) => {
+        setProducts(data);
+        setFilteredProducts(data);
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
-  if (isLoading) return <div>Loading...</div>
+  const categories = Array.from(new Set(products.map((p) => p.category)));
+
+  // Filter products based on search and selected categories
+  const applyFilters = () => {
+    let filtered = products;
+
+    if (tempSelectedCategories.length > 0) {
+      filtered = filtered.filter((p) => tempSelectedCategories.includes(p.category));
+    }
+
+    if (searchTerm.trim() !== "") {
+      filtered = filtered.filter((p) =>
+        p.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    setSelectedCategories(tempSelectedCategories);
+    setFilteredProducts(filtered);
+    setShowFilter(false);
+  };
+
+  const handleCheckboxChange = (category: string) => {
+    setTempSelectedCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((c) => c !== category)
+        : [...prev, category]
+    );
+  };
+
+  if (loading) return <div className="loading">Loading products...</div>;
 
   return (
-    <div className="grid md:grid-cols-4 gap-6">
-      {/* Sidebar Filters */}
-      <aside className="md:col-span-1 bg-white p-4 rounded shadow h-fit">
-        <h4 className="font-semibold mb-3">Filter Products</h4>
+    <div className="products-container" style={{ background: "none" }}>
+      <h1 className="products-title">Our Products</h1>
+
+      {/* Search & Filter */}
+      <div className="products-controls enhanced">
         <input
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          placeholder="Search"
-          className="w-full mb-3 input"
+          type="text"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+          aria-label="Search products"
         />
-        <div className="flex gap-2">
-          <input
-            type="number"
-            value={minPrice}
-            onChange={e => setMinPrice(e.target.value ? +e.target.value : '')}
-            placeholder="Min"
-            className="input w-1/2"
-          />
-          <input
-            type="number"
-            value={maxPrice}
-            onChange={e => setMaxPrice(e.target.value ? +e.target.value : '')}
-            placeholder="Max"
-            className="input w-1/2"
-          />
-        </div>
-        <button
-          onClick={() => {
-            setQuery('')
-            setMinPrice('')
-            setMaxPrice('')
-          }}
-          className="mt-3 text-sm text-teal-700"
-        >
-          Clear
-        </button>
-      </aside>
 
-      {/* Products List */}
-      <section className="md:col-span-3">
-        <div className="mb-4 flex justify-between items-center">
-          <h2 className="text-2xl font-semibold">Surgical Equipment</h2>
-          <div className="text-sm text-gray-600">{filtered.length} items</div>
-        </div>
+        <div className="filter-wrapper">
+          <button
+            className="filter-btn"
+            onClick={() => setShowFilter((prev) => !prev)}
+            aria-label="Filter products"
+          >
+            <FaFilter />
+          </button>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map(p => (
-            <ProductCard key={p.id} product={p} />
+          {showFilter && (
+            <div className="filter-dropdown">
+              {categories.map((cat) => (
+                <label key={cat} className="filter-option">
+                  <input
+                    type="checkbox"
+                    value={cat}
+                    checked={tempSelectedCategories.includes(cat)}
+                    onChange={() => handleCheckboxChange(cat)}
+                  />
+                  <span className="filter-label">{cat}</span>
+                </label>
+              ))}
+
+              <button className="apply-btn" onClick={applyFilters}>
+                Apply
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Product Grid */}
+      {filteredProducts.length === 0 ? (
+        <div className="no-results">No products found.</div>
+      ) : (
+        <div className="products-grid">
+          {filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
-      </section>
+      )}
     </div>
-  )
-}
+  );
+};
+
+export default Products;

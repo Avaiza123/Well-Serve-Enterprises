@@ -1,0 +1,161 @@
+/* Overall container */
+.about-container {
+  font-family: "Poppins", sans-serif;
+  color: #ffffff;
+  background: #f9f9fa; /* dark royal blue */
+  padding-bottom: 60px;
+}
+
+/* ===================== */
+/* HERO SECTION */
+/* ===================== */
+.about-hero {
+  text-align: center;
+  padding: 120px 20px 100px;
+  background: linear-gradient(135deg, #0f2d58, #05142e);
+  animation: fadeDown 1s ease-out;
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* ===================== */
+/* ABOUT CARDS */
+/* ===================== */
+.about-section {
+  padding: 60px 30px;
+}
+
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.about-card {
+  background: #11254d;
+  padding: 25px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.35);
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.about-card h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: #3bc9ff;
+}
+
+.about-card p {
+  font-size: 15px;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+/* ===================== */
+/* STATS SECTION */
+/* ===================== */
+.stats-section {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  padding: 50px 10px;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  text-align: center;
+  background: #0f2144;
+  padding: 25px 35px;
+  border-radius: 18px;
+  width: 200px;
+  transition: 0.3s;
+  transform: translateY(20px);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.3s ease forwards;
+}
+
+.stat-box:hover {
+  background: #16346d;
+  transform: translateY(-6px);
+}
+
+.stat-box h2 {
+  font-size: 36px;
+  color: #48e0ff;
+}
+
+.stat-box p {
+  font-size: 16px;
+  margin-top: 6px;
+  opacity: 0.8;
+}
+
+/* ===================== */
+/* WHY CHOOSE US */
+/* ===================== */
+.why-section {
+  text-align: center;
+  padding: 60px 20px;
+  background: #0f233f;
+  margin-top: 40px;
+  border-top: 2px solid #1a3b75;
+  border-bottom: 2px solid #1a3b75;
+}
+
+.why-section h2 {
+  font-size: 30px;
+  color: #00303e;
+  margin-bottom: 20px;
+}
+
+.why-section ul {
+  list-style: none;
+  padding: 0;
+  font-size: 18px;
+}
+
+.why-section li {
+  margin: 12px 0;
+  opacity: 0.9;
+}
+
+/* ===================== */
+/* ANIMATIONS */
+/* ===================== */
+@keyframes fadeUp {
+  from {
+    transform: translateY(25px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    transform: translateY(-25px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeUp 1s ease both;
+}

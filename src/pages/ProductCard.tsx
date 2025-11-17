@@ -1,17 +1,26 @@
-// src/components/ProductCard.tsx
-import React from 'react'
-import { Product } from './Products'
+import React from "react";
+import { Product, ProductService } from "../api/productsService";
+import "../styles/ProductCard.css";
+import { Link } from "react-router-dom";
 
 interface Props {
-  product: Product
+  product: Product;
 }
 
-export default function ProductCard({ product }: Props) {
+const ProductCard: React.FC<Props> = ({ product }) => {
   return (
-    <div className="border rounded p-4 shadow hover:shadow-md transition">
-      <img src={product.image} alt={product.name} className="w-full h-40 object-cover mb-2 rounded" />
-      <h3 className="font-semibold">{product.name}</h3>
-      <p className="text-teal-700 font-bold">${product.price.toFixed(2)}</p>
-    </div>
-  )
-}
+    <Link to={`/product/${product.id}`} className="product-card">
+      <div className="product-img-box">
+        <img src={product.imageUrl} alt={product.name} className="product-img" />
+      </div>
+
+      <h3 className="product-title">{product.name}</h3>
+
+      <p className="product-price">Rs {product.price.toFixed(2)}</p>
+
+      <button className="product-btn">View Details</button>
+    </Link>
+  );
+};
+
+export default ProductCard;
